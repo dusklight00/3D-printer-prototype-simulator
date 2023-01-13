@@ -35,14 +35,6 @@ export class Man {
   move(x, y) {
     return new Promise((resolve, reject) => {
       const angle = findAngleMadeByTwoPoints(this.coord.x, this.coord.y, x, y);
-      console.log(angle);
-      console.log(
-        convertRadianToDegree(angle),
-        this.coord.x,
-        this.coord.y,
-        x,
-        y
-      );
       const stepSizeComponents = findComponents(this.STEP_SIZE, angle);
       const horizontalStepSize = stepSizeComponents.x;
       const verticalStepSize = stepSizeComponents.y;

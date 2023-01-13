@@ -1,4 +1,4 @@
-const graphConfig = {
+export const graphConfig = {
   nodes: [
     {
       index: 0,

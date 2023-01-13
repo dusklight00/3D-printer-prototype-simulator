@@ -1,51 +1,30 @@
 import PIXIWrapper from "./pixi-wrapper.js";
 import { Man } from "./man.js";
-
-const graphConfig = {
-  nodes: [
-    {
-      index: 0,
-      x: 100,
-      y: 200,
-    },
-    {
-      index: 1,
-      x: 200,
-      y: 100,
-    },
-    {
-      index: 2,
-      x: 300,
-      y: 200,
-    },
-    {
-      index: 3,
-      x: 400,
-      y: 100,
-    },
-    {
-      index: 4,
-      x: 200,
-      y: 300,
-    },
-  ],
-  matrix: [
-    [0, 1, 0, 0, 0],
-    [1, 0, 1, 0, 0],
-    [0, 1, 0, 1, 1],
-    [0, 0, 1, 0, 0],
-    [0, 0, 1, 0, 0],
-  ],
-};
+import Graph from "./graph.js";
+import { graphConfig } from "./data.js";
 
 const app = new PIXIWrapper();
-const man = new Man(app, 100, 100);
+
+class DeliveryMan extends Man {
+  constructor(app, graph, startingNodeIndex) {
+    const startingNodeInfo = graph.getNodeDetails(startingNodeIndex);
+    super(app, startingNodeInfo.x, startingNodeInfo.y);
+    this.graph = graph;
+  }
+  async moveToNode(nodeIndex) {
+    const nodeInfo = graph.getNodeDetails(nodeIndex);
+    await this.move(nodeInfo.x, nodeInfo.y);
+  }
+}
+
+const graph = new Graph(graphConfig);
+const man = new DeliveryMan(app, graph, 0);
+
+graph.render(app);
 
 (async function () {
-  await man.move(200, 200);
-  await man.move(100, 300);
-  await man.move(200, 200);
-  await man.move(100, 100);
-  await man.move(200, 200);
-  await man.move(300, 200);
+  await man.moveToNode(1);
+  await man.moveToNode(2);
+  await man.moveToNode(3);
+  await man.moveToNode(4);
 })();
