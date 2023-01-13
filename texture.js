@@ -34,3 +34,14 @@ export function drawPoint(x, y) {
   );
   return point;
 }
+
+export function drawLine(x1, y1, x2, y2) {
+  const DEFAULT_LINE_FILL_COLOR = 0xffffff;
+  const DEFAULT_LINE_THICKNESS = 1;
+  const graphics = new PIXI.Graphics();
+  graphics.lineStyle(DEFAULT_LINE_THICKNESS, DEFAULT_LINE_FILL_COLOR, 1);
+  graphics.moveTo(x1, y1);
+  graphics.lineTo(x2, y2);
+  graphics.closePath();
+  return graphics;
+}

@@ -30,3 +30,21 @@ export function shortestPath(adjMatrix, start, end) {
   // Return the shortest path
   return path;
 }
+
+function checkTwoArrEquality(arr1, arr2) {
+  if (arr1.length != arr2.length) return false;
+  for (let i in arr1) {
+    const elem1 = arr1[i];
+    const elem2 = arr2[i];
+    if (elem1 !== elem2) return false;
+  }
+  return true;
+}
+
+export function checkArrContainsArr(arr, testArr) {
+  for (let i in arr) {
+    const row = arr[i];
+    if (checkTwoArrEquality(row, testArr)) return true;
+  }
+  return false;
+}
