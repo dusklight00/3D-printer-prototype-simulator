@@ -1,9 +1,9 @@
-import { drawPoint } from "./texture.js";
+import { drawPoint } from "../utility/texture.js";
 import {
   findAngleMadeByTwoPoints,
   findComponents,
   findDistanceBetweenTwoPoints,
-} from "./utils.js";
+} from "../utility/utils.js";
 
 export default class Man {
   constructor(app, sprite) {

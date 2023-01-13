@@ -1,7 +1,7 @@
-import PIXIWrapper from "./pixi-wrapper.js";
-import Graph from "./graph.js";
+import PIXIWrapper from "./wrappers/pixi-wrapper.js";
+import Graph from "./models/graph.js";
 import { graphConfig } from "./data.js";
-import DeliveryMan from "./delivery-man.js";
+import DeliveryMan from "./models/delivery-man.js";
 
 const app = new PIXIWrapper();
 

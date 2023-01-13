@@ -1,5 +1,5 @@
-import { drawLine, drawPoint } from "./texture.js";
-import { checkArrContainsArr } from "./utils.js";
+import { drawLine, drawPoint } from "../utility/texture.js";
+import { checkArrContainsArr } from "../utility/utils.js";
 
 export default class Graph {
   constructor(graphConfig) {

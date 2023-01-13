@@ -1,5 +1,5 @@
 import Man from "./man.js";
-import { drawSprite } from "./texture.js";
+import { drawSprite } from "../utility/texture.js";
 
 export default class DeliveryMan extends Man {
   constructor(app, graph, startingNodeIndex, spriteURL) {
