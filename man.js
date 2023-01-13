@@ -32,9 +32,18 @@ export default class Man {
     this.man.y += stepSize;
   }
   move(x, y) {
+    const THRESHOLD_MIN_DISTANCE = 0.001;
+    const currentDistance = findDistanceBetweenTwoPoints(
+      this.coord.x,
+      this.coord.y,
+      x,
+      y
+    );
+    if (currentDistance < THRESHOLD_MIN_DISTANCE) return false;
     return new Promise((resolve, reject) => {
       const angle = findAngleMadeByTwoPoints(this.coord.x, this.coord.y, x, y);
       const stepSizeComponents = findComponents(this.STEP_SIZE, angle);
+      console.log(stepSizeComponents);
       const horizontalStepSize = stepSizeComponents.x;
       const verticalStepSize = stepSizeComponents.y;
       const totalDistance = findDistanceBetweenTwoPoints(

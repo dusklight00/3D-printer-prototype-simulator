@@ -9,5 +9,5 @@ const graph = new Graph(graphConfig);
 graph.render(app);
 const man = new DeliveryMan(app, graph, 0);
 (async function () {
-  await man.giveAndCome(100, 100);
+  await man.moveShortestPath(3);
 })();
