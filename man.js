@@ -34,6 +34,7 @@ export class Man {
   }
   move(x, y) {
     return new Promise((resolve, reject) => {
+      console.log(this.coord.x, this.coord.y, x, y);
       const angle = findAngleMadeByTwoPoints(this.coord.x, this.coord.y, x, y);
       const stepSizeComponents = findComponents(this.STEP_SIZE, angle);
       const horizontalStepSize = stepSizeComponents.x;
@@ -52,7 +53,7 @@ export class Man {
           resolve();
         }
         this.moveRight(horizontalStepSize);
-        this.moveUp(verticalStepSize);
+        this.moveDown(verticalStepSize);
         totalStepRequired -= 1;
       }, 1000 / this.FRAME_RATE);
     });

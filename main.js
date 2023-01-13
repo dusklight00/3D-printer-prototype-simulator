@@ -2,6 +2,7 @@ import PIXIWrapper from "./pixi-wrapper.js";
 import { Man } from "./man.js";
 import Graph from "./graph.js";
 import { graphConfig } from "./data.js";
+import { drawPoint } from "./texture.js";
 
 const app = new PIXIWrapper();
 
@@ -15,16 +16,26 @@ class DeliveryMan extends Man {
     const nodeInfo = graph.getNodeDetails(nodeIndex);
     await this.move(nodeInfo.x, nodeInfo.y);
   }
+  async giveAndCome(x, y) {
+    const returnLocation = {
+      x: this.coord.x,
+      y: this.coord.y,
+    };
+    console.log(returnLocation);
+    await this.move(50, 50);
+    await this.move(200, 100);
+    console.log(returnLocation);
+  }
 }
 
-const graph = new Graph(graphConfig);
-const man = new DeliveryMan(app, graph, 0);
+const man = new Man(app, 50, 50);
 
-graph.render(app);
+const point1 = drawPoint(100, 200);
+const point2 = drawPoint(200, 100);
+const point3 = drawPoint(50, 50);
+app.render(point1, point2, point3);
 
 (async function () {
-  await man.moveToNode(1);
-  await man.moveToNode(2);
-  await man.moveToNode(3);
-  await man.moveToNode(4);
+  // await man.move(50, 50);
+  await man.move(100, 200);
 })();

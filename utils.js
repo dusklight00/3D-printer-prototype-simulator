@@ -54,45 +54,43 @@ export function findDistanceBetweenTwoPoints(x1, y1, x2, y2) {
 }
 
 export function findAngleMadeByTwoPoints(x1, y1, x2, y2) {
-  if (x2 >= x1 && y2 <= y1) return Math.atan((y1 - y2) / (x2 - x1));
+  if (x2 >= x1 && y2 <= y1) return Math.atan((x2 - x1) / (y1 - y2));
   if (x2 <= x1 && y2 <= y1) return Math.PI - Math.atan((y1 - y2) / (x1 - x2));
-  if (x2 <= x1 && y2 >= y1) return Math.PI + Math.atan((y2 - y1) / (x1 - x2));
-  if (x2 >= x1 && y2 >= y1)
-    return 2 * Math.PI - Math.atan((y2 - y1) / (x2 - x1));
+  if (x2 <= x1 && y2 >= y1)
+    return (3 * Math.PI) / 2 - Math.atan((x1 - x2) / (y2 - y1));
+  if (x2 >= x1 && y2 >= y1) {
+    // alert((3 * Math.PI) / 2 + Math.atan((x2 - x1) / (y2 - y1)));
+    return (3 * Math.PI) / 2 + Math.atan((x2 - x1) / (y2 - y1));
+  }
 }
 
 export function findComponents(magnitude, angle) {
-  if (angle <= Math.PI / 2)
+  if (angle <= Math.PI / 2) {
+    const acuteAngle = angle;
     return {
-      x: magnitude * Math.cos(angle),
-      y: magnitude * Math.sin(angle),
-    };
-  if (angle > Math.PI / 2 && angle <= Math.PI) {
-    const acuteAngle = Math.PI - angle;
-    return {
-      x: -1 * magnitude * Math.cos(acuteAngle),
-      y: magnitude * Math.sin(acuteAngle),
+      x: magnitude * Math.cos(acuteAngle),
+      y: -1 * magnitude * Math.sin(acuteAngle),
     };
   }
   if (angle > Math.PI / 2 && angle <= Math.PI) {
     const acuteAngle = Math.PI - angle;
-    return {
-      x: -1 * magnitude * Math.cos(acuteAngle),
-      y: magnitude * Math.sin(acuteAngle),
-    };
-  }
-  if (angle > Math.PI && angle <= (3 * Math.PI) / 2) {
-    const acuteAngle = angle - Math.PI;
     return {
       x: -1 * magnitude * Math.cos(acuteAngle),
       y: -1 * magnitude * Math.sin(acuteAngle),
+    };
+  }
+  if (angle > Math.PI && angle <= (3 * Math.PI) / 2) {
+    const acuteAngle = (3 * Math.PI) / 2 - angle;
+    return {
+      x: -1 * magnitude * Math.sin(acuteAngle),
+      y: magnitude * Math.cos(acuteAngle),
     };
   }
   if (angle > (3 * Math.PI) / 2 && angle <= 2 * Math.PI) {
     const acuteAngle = angle - (3 * Math.PI) / 2;
     return {
-      x: magnitude * Math.cos(acuteAngle),
-      y: -1 * magnitude * Math.sin(acuteAngle),
+      x: magnitude * Math.sin(acuteAngle),
+      y: magnitude * Math.cos(acuteAngle),
     };
   }
   return new Error("Angle is greater than 2 * Math.PI");
