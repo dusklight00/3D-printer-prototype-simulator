@@ -1,12 +1,11 @@
 import { drawPoint } from "./texture.js";
 import {
   findAngleMadeByTwoPoints,
-  convertRadianToDegree,
   findComponents,
   findDistanceBetweenTwoPoints,
 } from "./utils.js";
 
-export class Man {
+export default class Man {
   constructor(app, x, y) {
     this.app = app;
     this.man = drawPoint(x, y);
