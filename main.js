@@ -21,21 +21,14 @@ class DeliveryMan extends Man {
       x: this.coord.x,
       y: this.coord.y,
     };
-    console.log(returnLocation);
-    await this.move(50, 50);
-    await this.move(200, 100);
-    console.log(returnLocation);
+    await this.move(x, y);
+    await this.move(returnLocation.x, returnLocation.y);
   }
 }
 
-const man = new Man(app, 50, 50);
-
-const point1 = drawPoint(100, 200);
-const point2 = drawPoint(200, 100);
-const point3 = drawPoint(50, 50);
-app.render(point1, point2, point3);
-
+const graph = new Graph(graphConfig);
+graph.render(app);
+const man = new DeliveryMan(app, graph, 0);
 (async function () {
-  // await man.move(50, 50);
-  await man.move(100, 200);
+  await man.giveAndCome(100, 100);
 })();
