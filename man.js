@@ -6,10 +6,10 @@ import {
 } from "./utils.js";
 
 export default class Man {
-  constructor(app, x, y) {
+  constructor(app, sprite) {
     this.app = app;
-    this.man = drawPoint(x, y);
-    this.coord = { x, y };
+    this.man = sprite;
+    this.coord = { x: sprite.x, y: sprite.y };
     this.app.render(this.man);
 
     this.STEP_SIZE = 1;

@@ -1,9 +1,15 @@
 import Man from "./man.js";
+import { drawSprite } from "./texture.js";
 
 export default class DeliveryMan extends Man {
-  constructor(app, graph, startingNodeIndex) {
+  constructor(app, graph, startingNodeIndex, spriteURL) {
     const startingNodeInfo = graph.getNodeDetails(startingNodeIndex);
-    super(app, startingNodeInfo.x, startingNodeInfo.y);
+    const sprite = drawSprite(
+      spriteURL,
+      startingNodeInfo.x,
+      startingNodeInfo.y
+    );
+    super(app, sprite);
     this.graph = graph;
     this.currentNode = startingNodeIndex;
   }
