@@ -75,6 +75,7 @@ class Man {
   move(x, y) {
     return new Promise((resolve, reject) => {
       const angle = findAngleMadeByTwoPoints(this.coord.x, this.coord.y, x, y);
+      console.log(angle)
       console.log(
         convertRadianToDegree(angle),
         this.coord.x,
@@ -98,7 +99,6 @@ class Man {
           clearInterval(animation);
           resolve();
         }
-        // console.log(horizontalStepSize);
         this.moveRight(horizontalStepSize);
         this.moveUp(verticalStepSize);
         totalStepRequired -= 1;
@@ -112,8 +112,9 @@ const man = new Man(app, 100, 100);
 
 (async function () {
   await man.move(200, 200);
-  await man.move(100, 100);
-  await man.move(200, 200);
   await man.move(100, 300);
   await man.move(200, 200);
+  await man.move(100, 100);
+  await man.move(200, 200);
+  await man.move(300, 200)
 })();
