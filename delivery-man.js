@@ -25,10 +25,9 @@ export default class DeliveryMan extends Man {
       this.currentNode,
       targetNodeIndex
     );
-    await this.moveToNode(0);
-    await this.moveToNode(1);
-    // shortestPath.forEach(async (nodeIndex) => {
-    //   await this.moveToNode(nodeIndex);
-    // });
+    for (let i in shortestPath) {
+      const nodeIndex = shortestPath[i];
+      await this.moveToNode(nodeIndex);
+    }
   }
 }
