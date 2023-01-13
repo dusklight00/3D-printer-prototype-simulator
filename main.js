@@ -1,13 +1,16 @@
 import PIXIWrapper from "./pixi-wrapper.js";
-import Graph from "./graph.js";
-import { graphConfig } from "./data.js";
-import DeliveryMan from "./delivery-man.js";
+import { drawSprite } from "./texture.js";
 
 const app = new PIXIWrapper();
 
-const graph = new Graph(graphConfig);
-graph.render(app);
-const man = new DeliveryMan(app, graph, 0);
-(async function () {
-  await man.moveShortestPath(3);
-})();
+const bunny = drawSprite(
+  "bunny.png",
+  app.instance.screen.width / 2,
+  app.instance.screen.height / 2
+);
+
+app.render(bunny);
+
+console.log(bunny.x, bunny.y);
+
+// bunny.rotation = Math.PI;

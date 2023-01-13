@@ -43,7 +43,6 @@ export default class Man {
     return new Promise((resolve, reject) => {
       const angle = findAngleMadeByTwoPoints(this.coord.x, this.coord.y, x, y);
       const stepSizeComponents = findComponents(this.STEP_SIZE, angle);
-      console.log(stepSizeComponents);
       const horizontalStepSize = stepSizeComponents.x;
       const verticalStepSize = stepSizeComponents.y;
       const totalDistance = findDistanceBetweenTwoPoints(

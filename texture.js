@@ -45,3 +45,11 @@ export function drawLine(x1, y1, x2, y2) {
   graphics.closePath();
   return graphics;
 }
+
+export function drawSprite(imageURL, x, y) {
+  const sprite = PIXI.Sprite.from(imageURL);
+  sprite.anchor.set(0.5);
+  sprite.x = x;
+  sprite.y = y;
+  return sprite;
+}
