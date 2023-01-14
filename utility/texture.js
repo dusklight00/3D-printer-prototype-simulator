@@ -13,18 +13,10 @@ export function drawSquare(x, y, width, height) {
 }
 
 export function drawAnchorDownSquare(x, y, width, height) {
-  const graphic = new PIXI.Graphics();
-  graphic.beginFill(0xcccccc);
-  graphic.lineStyle(3, 0x0099ff, 1);
-  graphic.moveTo(x, y);
-  graphic.lineTo(x + width / 2, y);
-  graphic.lineTo(x + width / 2, y - height);
-  graphic.lineTo(x - width / 2, y - height);
-  graphic.lineTo(x - width / 2, y);
-  graphic.lineTo(x, y);
-  graphic.closePath();
-  graphic.endFill();
-  return graphic;
+  const centerX = x;
+  const centerY = y - height / 2;
+  const square = drawSquare(centerX, centerY, width, height);
+  return square;
 }
 
 export function drawCircle(x, y, radius, stroke, fill) {
