@@ -1,14 +1,7 @@
+import { drawAnchorDownSquare } from "./utility/texture.js";
 import PIXIWrapper from "./wrappers/pixi-wrapper.js";
 
 const app = new PIXIWrapper();
+const square = drawAnchorDownSquare(200, 200, 100, 50);
 
-const city = [
-  {
-    x: 100,
-    y: 100,
-    width: 100,
-    height: 100,
-  },
-];
-
-app.renderCity(city);
+app.render(square);
