@@ -32,4 +32,7 @@ export default class DeliveryMan extends Man {
       await this.moveToNode(nodeIndex);
     }
   }
+  hasPackage(status) {
+    this.sprite.setNotification(status);
+  }
 }

@@ -7,4 +7,10 @@ const app = new PIXIWrapper();
 const graph = new Graph(graphConfig);
 graph.render(app);
 const man = new DeliveryMan(app, graph, 0);
-man.moveShortestPath(3);
+(async function () {
+  man.hasPackage(false);
+  await man.moveShortestPath(3);
+  man.hasPackage(true);
+  await man.moveShortestPath(0);
+  man.hasPackage(false);
+})();
