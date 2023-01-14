@@ -1,7 +1,7 @@
 export function drawSquare(x, y, width, height) {
   const graphic = new PIXI.Graphics();
-  graphic.beginFill(0xff3300);
-  graphic.lineStyle(10, 0xffd900, 1);
+  graphic.beginFill(0xcccccc);
+  graphic.lineStyle(3, 0x0099ff, 1);
   graphic.moveTo(x - width / 2, y - height / 2);
   graphic.lineTo(x + width / 2, y - height / 2);
   graphic.lineTo(x + width / 2, y + height / 2);
