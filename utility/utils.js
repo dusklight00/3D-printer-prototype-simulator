@@ -54,14 +54,12 @@ export function findDistanceBetweenTwoPoints(x1, y1, x2, y2) {
 }
 
 export function findAngleMadeByTwoPoints(x1, y1, x2, y2) {
-  if (x2 >= x1 && y2 <= y1) return Math.atan((x2 - x1) / (y1 - y2));
+  if (x2 >= x1 && y2 <= y1) return Math.atan((y1 - y2) / (x2 - x1));
   if (x2 <= x1 && y2 <= y1) return Math.PI - Math.atan((y1 - y2) / (x1 - x2));
   if (x2 <= x1 && y2 >= y1)
     return (3 * Math.PI) / 2 - Math.atan((x1 - x2) / (y2 - y1));
-  if (x2 >= x1 && y2 >= y1) {
-    // alert((3 * Math.PI) / 2 + Math.atan((x2 - x1) / (y2 - y1)));
+  if (x2 >= x1 && y2 >= y1)
     return (3 * Math.PI) / 2 + Math.atan((x2 - x1) / (y2 - y1));
-  }
 }
 
 export function findComponents(magnitude, angle) {

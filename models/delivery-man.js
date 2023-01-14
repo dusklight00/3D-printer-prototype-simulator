@@ -1,14 +1,10 @@
 import Man from "./man.js";
-import { drawSprite } from "../utility/texture.js";
+import BunnySprite from "../sprites/bunny-sprite.js";
 
 export default class DeliveryMan extends Man {
-  constructor(app, graph, startingNodeIndex, spriteURL) {
+  constructor(app, graph, startingNodeIndex) {
     const startingNodeInfo = graph.getNodeDetails(startingNodeIndex);
-    const sprite = drawSprite(
-      spriteURL,
-      startingNodeInfo.x,
-      startingNodeInfo.y
-    );
+    const sprite = new BunnySprite(app, startingNodeInfo.x, startingNodeInfo.y);
     super(app, sprite);
     this.graph = graph;
     this.currentNode = startingNodeIndex;

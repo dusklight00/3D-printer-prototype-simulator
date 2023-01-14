@@ -1,6 +1,10 @@
 import PIXIWrapper from "./wrappers/pixi-wrapper.js";
-import BunnySprite from "./sprites/bunny-sprite.js";
+import { graphConfig } from "./data.js";
+import DeliveryMan from "./models/delivery-man.js";
+import Graph from "./models/graph.js";
 
 const app = new PIXIWrapper();
-const man = new BunnySprite(app, 100, 100);
-man.setNotification(true);
+const graph = new Graph(graphConfig);
+graph.render(app);
+const man = new DeliveryMan(app, graph, 0);
+man.moveShortestPath(3);

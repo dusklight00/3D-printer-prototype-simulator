@@ -1,5 +1,6 @@
 import { drawPoint } from "../utility/texture.js";
 import {
+  convertRadianToDegree,
   findAngleMadeByTwoPoints,
   findComponents,
   findDistanceBetweenTwoPoints,
@@ -8,28 +9,27 @@ import {
 export default class Man {
   constructor(app, sprite) {
     this.app = app;
-    this.man = sprite;
-    this.coord = { x: sprite.x, y: sprite.y };
-    this.app.render(this.man);
+    this.sprite = sprite;
+    this.coord = { x: sprite.container.x, y: sprite.container.y };
 
     this.STEP_SIZE = 1;
     this.FRAME_RATE = 60;
   }
   moveLeft(stepSize) {
     this.coord.x -= stepSize;
-    this.man.x -= stepSize;
+    this.sprite.container.x -= stepSize;
   }
   moveRight(stepSize) {
     this.coord.x += stepSize;
-    this.man.x += stepSize;
+    this.sprite.container.x += stepSize;
   }
   moveUp(stepSize) {
     this.coord.y -= stepSize;
-    this.man.y -= stepSize;
+    this.sprite.container.y -= stepSize;
   }
   moveDown(stepSize) {
     this.coord.y += stepSize;
-    this.man.y += stepSize;
+    this.sprite.container.y += stepSize;
   }
   move(x, y) {
     const THRESHOLD_MIN_DISTANCE = 0.001;
