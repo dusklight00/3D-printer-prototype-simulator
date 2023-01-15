@@ -14,3 +14,20 @@ const man = new DeliveryMan(app, graph, 0);
   await man.moveShortestPath(0);
   man.hasPackage(false);
 })();
+
+{
+  /* <div class="printer complete" id="printer1">
+    <div class="top"></div>
+    <div class="middle">
+      <div class="stand"></div>
+      <div class="air">
+        <div class="tool-container">
+          <div class="arm"></div>
+          <div class="point"></div>
+        </div>
+        <div class="workpiece"></div>
+      </div>
+    </div>
+    <div class="base"></div>
+  </div> */
+}
