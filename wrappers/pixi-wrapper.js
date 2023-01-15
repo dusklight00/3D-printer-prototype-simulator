@@ -1,9 +1,12 @@
 import { drawSquare } from "../utility/texture.js";
 
 export default class PIXIWrapper {
-  constructor() {
-    this.instance = new PIXI.Application({ antialias: true });
-    document.body.appendChild(this.instance.view);
+  constructor(containerElement) {
+    this.instance = new PIXI.Application({
+      antialias: true,
+      resizeTo: containerElement,
+    });
+    containerElement.appendChild(this.instance.view);
   }
   render(...graphics) {
     graphics.forEach((graphic) => {

@@ -1,4 +1,4 @@
-import Printer from "./models/printer.js";
+import PIXIWrapper from "./wrappers/pixi-wrapper.js";
 
-const printer = new Printer("printer1");
-printer.start();
+const city = document.getElementById("city");
+const app = new PIXIWrapper(city);
