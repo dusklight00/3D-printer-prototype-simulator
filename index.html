@@ -7,8 +7,22 @@
   <title>3D Printer Prototype</title>
   <script src="https://pixijs.download/v7.0.5/pixi.js" type="text/javascript"></script>
   <script src="main.js" type="module" defer></script>
+  <link rel="stylesheet" href="printer.css">
 </head>
 <body>
-  
+  <div class="printer complete" id="printer1">
+    <div class="top"></div>
+    <div class="middle">
+      <div class="stand"></div>
+      <div class="air">
+        <div class="tool-container">
+          <div class="arm"></div>
+          <div class="point"></div>
+        </div>
+        <div class="workpiece"></div>
+      </div>
+    </div>
+    <div class="base"></div>
+  </div>
 </body>
 </html>
