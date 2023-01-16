@@ -15,9 +15,7 @@ export default class Queue {
     });
   }
   truncate() {
-    this.orders.forEach((orderElem) => {
-      this.QUEUE_CONTAINER.innerHTML = "";
-    });
+    this.QUEUE_CONTAINER.innerHTML = "";
   }
   update(queueConfig) {
     this.truncate();
