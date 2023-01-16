@@ -1,6 +1,6 @@
 import Queue from "./modules/queue.js";
 
-const queueConfig = [
+const config = [
   {
     name: "pratul",
     status: "Complete",
@@ -11,4 +11,5 @@ const queueConfig = [
   },
 ];
 
-const queue = new Queue(queueConfig);
+const queue = new Queue();
+queue.live("something");

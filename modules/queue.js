@@ -1,12 +1,12 @@
 import OrderElement from "./order-element.js";
+import { getOrders } from "./backend-wrapper.js";
 
 export default class Queue {
-  constructor(queueConfig) {
+  constructor() {
     this.QUEUE_CONTAINER = document.querySelector(".queue-container");
     this.orders = [];
-    this.renderQueue(queueConfig);
   }
-  renderQueue(queueConfig) {
+  render(queueConfig) {
     queueConfig.forEach((config) => {
       const name = config.name;
       const status = config.status;
@@ -14,13 +14,20 @@ export default class Queue {
       this.orders.push(element);
     });
   }
-  truncateQueue() {
+  truncate() {
     this.orders.forEach((orderElem) => {
-      this.QUEUE_CONTAINER.removeChild(orderElem);
+      this.QUEUE_CONTAINER.innerHTML = "";
     });
   }
-  updateQueue(queueConfig) {
-    this.truncateQueue();
-    this.renderQueue(queueConfig);
+  update(queueConfig) {
+    this.truncate();
+    this.render(queueConfig);
+  }
+  live() {
+    const UPDATE_DELAY = 1000;
+    setInterval(async () => {
+      const orders = await getOrders();
+      this.update(orders);
+    }, UPDATE_DELAY);
   }
 }
