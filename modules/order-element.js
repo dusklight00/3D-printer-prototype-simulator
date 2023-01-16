@@ -25,6 +25,7 @@ export default class OrderElement {
     statusElem.innerHTML = "Status: ";
     const statusType = document.createElement("span");
     statusType.className = "status-type";
+    statusType.innerHTML = status;
 
     // Nesting
     orderContainer.appendChild(model);

@@ -1,5 +1,14 @@
-import OrderElement from "./modules/order-element.js";
+import Queue from "./modules/queue.js";
 
-const order = new OrderElement("rahul", "complete");
-order.statusComplete();
-// order.removeOrder();
+const queueConfig = [
+  {
+    name: "pratul",
+    status: "Complete",
+  },
+  {
+    name: "pratul2",
+    status: "Complete",
+  },
+];
+
+const queue = new Queue(queueConfig);
