@@ -97,3 +97,16 @@ export function findComponents(magnitude, angle) {
 export function convertRadianToDegree(angle) {
   return angle * (180 / Math.PI);
 }
+
+export function get(url) {
+  return new Promise((resolve, reject) => {
+    const request = new XMLHttpRequest();
+    request.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+        resolve(this.responseText);
+      }
+    };
+    request.open("GET", url);
+    request.send();
+  });
+}
