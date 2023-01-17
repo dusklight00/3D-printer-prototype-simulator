@@ -2,7 +2,7 @@ import Man from "./man.js";
 import BunnySprite from "../sprites/bunny-sprite.js";
 
 export default class DeliveryMan extends Man {
-  constructor(app, graph, startingNodeIndex) {
+  constructor(app, graph, city, startingNodeIndex) {
     const startingNodeInfo = graph.getNodeDetails(startingNodeIndex);
     const sprite = new BunnySprite(app, startingNodeInfo.x, startingNodeInfo.y);
     super(app, sprite);
