@@ -1,4 +1,12 @@
 export const graphConfig = {
+  machines: [{ x: 200, y: 200, connectingNode: 2 }],
+  homes: [
+    {
+      x: 50,
+      y: 50,
+      connectingNode: 0,
+    },
+  ],
   nodes: [
     {
       index: 0,

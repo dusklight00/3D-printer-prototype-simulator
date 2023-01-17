@@ -1,7 +1,14 @@
-export function drawSquare(x, y, width, height) {
+export function drawSquare(
+  x,
+  y,
+  width,
+  height,
+  fillColor = 0xcccccc,
+  borderColor = 0x0099ff
+) {
   const graphic = new PIXI.Graphics();
-  graphic.beginFill(0xcccccc);
-  graphic.lineStyle(3, 0x0099ff, 1);
+  graphic.beginFill(fillColor);
+  graphic.lineStyle(3, borderColor, 1);
   graphic.moveTo(x - width / 2, y - height / 2);
   graphic.lineTo(x + width / 2, y - height / 2);
   graphic.lineTo(x + width / 2, y + height / 2);

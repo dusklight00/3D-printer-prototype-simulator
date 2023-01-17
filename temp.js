@@ -45,5 +45,18 @@ const config = [
   },
 ];
 
-const queue = new Queue();
-queue.live();
+// const queue = new Queue();
+// queue.live();
+
+// const order = {
+//   machine: 0,
+//   home: 0,
+// };
+// const graph = new Graph(graphConfig);
+// graph.render(app);
+
+// const man = new DeliveryMan(app, graph, 0);
+// man.completeOrder(order);
+
+// const printer = new Printer("printer1");
+// printer.completeWork(10);
