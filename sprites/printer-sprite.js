@@ -1,7 +1,7 @@
 import { drawSquare } from "../utility/texture.js";
 
 export default class PrinterSprite {
-  constructor(app, x, y, label = "1") {
+  constructor(app, x, y, label = "") {
     this.app = app;
 
     const PRINTER_WIDTH = 50;
