@@ -10,7 +10,7 @@ export default class PrinterSprite {
     const NOTIFICATION_PATH = "./assets/has-model-icon.png";
     const BLANK_TEXTURE_PATH = "./assets/blank.png";
 
-    const PRINTER_STROKE_COLOR = 0xff0000;
+    const PRINTER_STROKE_COLOR = 0x0099ff;
     const PRINTER_FILL_COLOR = 0xff0000;
 
     this.notificationTexture = PIXI.Texture.from(NOTIFICATION_PATH);
@@ -24,6 +24,7 @@ export default class PrinterSprite {
       PRINTER_FILL_COLOR,
       PRINTER_STROKE_COLOR
     );
+
     this.notification = new PIXI.Sprite(this.notificationTexture);
     this.notification.anchor.set(0.5);
     this.label = new PIXI.Text(label);
