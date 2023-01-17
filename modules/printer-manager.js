@@ -1,3 +1,5 @@
+import Printer from './printer.js';
+
 export default class PrinterManager {
   constructor(printerIDs) {
     this.printers = [];
@@ -8,6 +10,6 @@ export default class PrinterManager {
   }
   async assignPrinterWork(index, completionTime) {
     const printer = this.printers[index];
-    await printer.compeleteWork(completionTime);
+    await printer.completeWork(completionTime);
   }
 }
