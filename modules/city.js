@@ -1,6 +1,6 @@
-import { drawSquare } from "../utility/texture.js";
-import PrinterSprite from "../sprites/printer-sprite.js";
-import HomeSprite from "../sprites/home-sprite.js";
+import { drawSquare } from '../utility/texture.js';
+import PrinterSprite from '../sprites/printer-sprite.js';
+import HomeSprite from '../sprites/home-sprite.js';
 
 export default class City {
   constructor(app, config) {

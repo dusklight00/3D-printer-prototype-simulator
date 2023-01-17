@@ -1,9 +1,29 @@
-import { drawLine, drawPoint } from "../utility/texture.js";
-import { checkArrContainsArr } from "../utility/utils.js";
+import { drawLine, drawPoint } from '../utility/texture.js';
+import { checkArrContainsArr } from '../utility/utils.js';
 
 export default class Graph {
   constructor(graphConfig) {
     this.config = graphConfig;
+  }
+
+  getMachineConnectingNode(machineIndex) {
+    const machine = this.config.machines[machineIndex];
+    return machine.connectingNode;
+  }
+
+  getHomeConnectingNode(homeIndex) {
+    const home = this.config.homes[homeIndex];
+    return home.connectingNode;
+  }
+
+  getMachineNode(index) {
+    const machine = this.config.machines[index];
+    return machine;
+  }
+
+  getHomeNode(index) {
+    const home = this.config.homes[index];
+    return home;
   }
 
   getNodeDetails(nodeIndex) {
