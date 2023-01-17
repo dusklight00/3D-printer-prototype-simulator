@@ -17,6 +17,8 @@
   border:solid thin #000;
   height: 50px;
   width: 150px;
+  padding: 10px;
+  box-sizing: border-box;
 }
 
 .stand {
@@ -75,4 +77,15 @@
   height: 210px;
   border: solid thin #000;
   width: 150px;
+}
+
+.progress-bar {
+  border: solid thin #000;
+  height: 20px;
+  width: 100%;
+}
+.progress {
+  background-color: greenyellow;
+  width: 0%;
+  height: 100%;
 }

@@ -110,3 +110,11 @@ export function get(url) {
     request.send();
   });
 }
+
+export function delay(timeout) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve();
+    }, timeout);
+  });
+}

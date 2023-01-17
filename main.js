@@ -1,6 +1,7 @@
 import Graph from "./modules/graph.js";
 import PIXIWrapper from "./wrappers/pixi-wrapper.js";
 import DeliveryMan from "./modules/delivery-man.js";
+import Printer from "./modules/printer.js";
 
 const container = document.querySelector(".city-container");
 const app = new PIXIWrapper(container);
@@ -60,3 +61,6 @@ graph.render(app);
 
 const man = new DeliveryMan(app, graph, 0);
 man.completeOrder(order);
+
+const printer = new Printer("printer1");
+printer.completeWork(10);
