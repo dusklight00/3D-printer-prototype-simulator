@@ -31,3 +31,19 @@ const man = new DeliveryMan(app, graph, 0);
     <div class="base"></div>
   </div> */
 }
+
+import Queue from "./modules/queue.js";
+
+const config = [
+  {
+    name: "pratul",
+    status: "Complete",
+  },
+  {
+    name: "pratul2",
+    status: "Complete",
+  },
+];
+
+const queue = new Queue();
+queue.live();

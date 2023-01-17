@@ -76,13 +76,28 @@ export default class Graph {
   }
 
   render(app) {
+    const RED_COLOR = 0xff0000;
+    const BLUE_COLOR = 0x0099ff;
+
+    // Rendering Home
+    this.config.homes.forEach((home) => {
+      const point = drawPoint(home.x, home.y, RED_COLOR);
+      app.render(point);
+    });
+
+    // Rendering Machines
+    this.config.machines.forEach((machine) => {
+      const point = drawPoint(machine.x, machine.y, BLUE_COLOR);
+      app.render(point);
+    });
+
     // Rendering Nodes
     this.config.nodes.forEach((node) => {
       const point = drawPoint(node.x, node.y);
       app.render(point);
     });
 
-    // Rendering Connections
+    // Rendering Node Connections
     const pairs = this.findConnectingPair();
     pairs.forEach((pair) => {
       const nodeOneIndex = pair[0];
@@ -90,6 +105,34 @@ export default class Graph {
       const node1 = this.config.nodes[nodeOneIndex];
       const node2 = this.config.nodes[nodeTwoIndex];
       const line = drawLine(node1.x, node1.y, node2.x, node2.y);
+      app.render(line);
+    });
+
+    // Rendering Home Connections
+    this.config.homes.forEach((home) => {
+      const connectingNodeIndex = home.connectingNode;
+      const connectingNode = this.config.nodes[connectingNodeIndex];
+      const line = drawLine(
+        home.x,
+        home.y,
+        connectingNode.x,
+        connectingNode.y,
+        RED_COLOR
+      );
+      app.render(line);
+    });
+
+    // Rending Machine Connections
+    this.config.machines.forEach((machine) => {
+      const connectingNodeIndex = machine.connectingNode;
+      const connectingNode = this.config.nodes[connectingNodeIndex];
+      const line = drawLine(
+        machine.x,
+        machine.y,
+        connectingNode.x,
+        connectingNode.y,
+        BLUE_COLOR
+      );
       app.render(line);
     });
   }

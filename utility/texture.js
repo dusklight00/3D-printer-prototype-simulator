@@ -28,25 +28,23 @@ export function drawCircle(x, y, radius, stroke, fill) {
   return circle;
 }
 
-export function drawPoint(x, y) {
+export function drawPoint(x, y, strokeColor = 0xffffff) {
   const DEFAULT_POINT_RADIUS = 1;
   const DEFAULT_POINT_FILL_COLOR = 0xffffff;
-  const DEFAULT_POINT_STROKE_COLOR = 0xffffff;
   const point = drawCircle(
     x,
     y,
     DEFAULT_POINT_RADIUS,
-    DEFAULT_POINT_STROKE_COLOR,
+    strokeColor,
     DEFAULT_POINT_FILL_COLOR
   );
   return point;
 }
 
-export function drawLine(x1, y1, x2, y2) {
-  const DEFAULT_LINE_FILL_COLOR = 0xffffff;
+export function drawLine(x1, y1, x2, y2, fillColor = 0xffffff) {
   const DEFAULT_LINE_THICKNESS = 1;
   const graphics = new PIXI.Graphics();
-  graphics.lineStyle(DEFAULT_LINE_THICKNESS, DEFAULT_LINE_FILL_COLOR, 1);
+  graphics.lineStyle(DEFAULT_LINE_THICKNESS, fillColor, 1);
   graphics.moveTo(x1, y1);
   graphics.lineTo(x2, y2);
   graphics.closePath();

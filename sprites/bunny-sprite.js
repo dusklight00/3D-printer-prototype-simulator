@@ -25,6 +25,8 @@ export default class BunnySprite {
     this.notification.y -= 60;
     this.container.x = x;
     this.container.y = y;
+
+    this.setNotification(false);
     app.render(this.container);
   }
   setNotification(status) {
