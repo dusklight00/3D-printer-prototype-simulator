@@ -41,5 +41,10 @@ export default class City {
       );
       machines.push(machine);
     });
+    return machines;
+  }
+  setMachineNotification(index, status) {
+    const machine = this.machines[index];
+    machine.setNotification(status);
   }
 }

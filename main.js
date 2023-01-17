@@ -34,3 +34,4 @@ const cityConfig = {
 const container = document.querySelector(".city-container");
 const app = new PIXIWrapper(container);
 const city = new City(app, cityConfig);
+city.setMachineNotification(0, true);
