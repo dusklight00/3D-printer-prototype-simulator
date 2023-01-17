@@ -1,6 +1,9 @@
 import PIXIWrapper from './wrappers/pixi-wrapper.js';
 import City from './modules/city.js';
 import Graph from './modules/graph.js';
+import DeliveryMan from './modules/delivery-man.js';
+import PrinterSprite from './sprites/printer-sprite.js';
+import Printer from './modules/printer.js';
 
 const cityConfig = {
   homes: [
@@ -84,4 +87,26 @@ const graph = new Graph(graphConfig);
 graph.render(app);
 
 const city = new City(app, cityConfig);
-city.setMachineNotification(0, true);
+
+const printer1 = new Printer('printer1');
+const printer2 = new Printer('printer2');
+const printer3 = new Printer('printer3');
+
+const printers = [printer1, printer2, printer3];
+
+const man = new DeliveryMan(app, graph, city, printers, 0);
+
+const order = {
+  machine: 0,
+  home: 0,
+  completionTime: 1,
+  printerAllocated: 0,
+};
+
+man.completeOrder(order);
+
+// man.moveShortestPath(3);
+
+// const graph = new Graph(graphConfig);
+// const result = graph.getHomeConnectingNode(0);
+// console.log(result);
