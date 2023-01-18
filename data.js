@@ -10,6 +10,11 @@ export const graphConfig = {
       y: 50,
       connectingNode: 0,
     },
+    {
+      x: 200,
+      y: 50,
+      connectingNode: 1,
+    },
   ],
   nodes: [
     {
@@ -55,6 +60,13 @@ export const cityConfig = {
       width: 100,
       height: 100,
       label: '1',
+    },
+    {
+      x: 200,
+      y: 50,
+      width: 100,
+      height: 100,
+      label: '2',
     },
   ],
   buildings: [

@@ -127,16 +127,20 @@ export default class PrinterManager {
     if (freePrinterIndex == null) return false;
     if (orderIndex == null) return false;
 
+    const order = this.queue[orderIndex];
+    order.printerAllocated = freePrinterIndex;
+
     await this.assignWork(freePrinterIndex, orderIndex);
     return true;
   }
   completeOrderAwait(order) {
     return new Promise((resolve, reject) => {
       const id = this.addOrder(order);
+      const queueOrder = this.getOrderDetail(id);
       const CHECK_RATE = 1;
       setInterval(() => {
         const isComplete = this.isOrderComplete(id);
-        if (isComplete) resolve();
+        if (isComplete) resolve(queueOrder.printerAllocated);
       }, 1000 / CHECK_RATE);
     });
   }

@@ -33,10 +33,11 @@ class DeliveryManManager {
       });
     }
   }
-  addOrder(order) {
+  addOrder(order, machineIndex) {
     const id = generateUUID();
     this.queue.push({
       id: id,
+      machine: machineIndex,
       ...order,
     });
     return id;
@@ -90,9 +91,9 @@ class DeliveryManManager {
     await man.object.completeOrder(homeIndex, machineIndex);
     man.isBusy = false;
   }
-  completeOrderAwait(order) {
+  completeOrderAwait(order, machineIndex) {
     return new Promise((resolve, reject) => {
-      const id = this.addOrder(order);
+      const id = this.addOrder(order, machineIndex);
       const CHECK_RATE = 1;
       setInterval(() => {
         const order = this.findOrder(id);
@@ -134,23 +135,25 @@ const deliveryManager = new DeliveryManManager(
 );
 deliveryManager.start();
 
+async function completeOrder(order) {
+  const machineIndex = await printerManager.completeOrderAwait(order);
+  await deliveryManager.completeOrderAwait(order, machineIndex);
+  return true;
+}
+
 const order1 = {
   home: 0,
-  machine: 0,
   completionTime: 10,
   isShipped: false,
   isShipping: false,
 };
 
 const order2 = {
-  home: 0,
-  machine: 1,
+  home: 1,
   completionTime: 10,
   isShipped: false,
   isShipping: false,
 };
 
-(async function () {
-  await printerManager.completeOrderAwait(order1);
-  await deliveryManager.completeOrderAwait(order1);
-})();
+completeOrder(order1);
+completeOrder(order2);
