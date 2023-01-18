@@ -30,9 +30,9 @@ export default class DeliveryManManager {
   addOrder(order, machineIndex) {
     const id = generateUUID();
     this.queue.push({
-      id: id,
-      machine: machineIndex,
       ...order,
+      internalID: id,
+      machine: machineIndex,
     });
     return id;
   }
@@ -40,7 +40,7 @@ export default class DeliveryManManager {
   findOrder(id) {
     for (let i in this.queue) {
       const order = this.queue[i];
-      if (order.id === id) return order;
+      if (order.internalID === id) return order;
     }
     return null;
   }
@@ -83,15 +83,16 @@ export default class DeliveryManManager {
     order.isShipping = true;
     await man.object.completeOrder(homeIndex, machineIndex);
     man.isBusy = false;
+    order.isShipped = true;
   }
   completeOrderAwait(order, machineIndex) {
     return new Promise((resolve, reject) => {
       const id = this.addOrder(order, machineIndex);
       const CHECK_RATE = 1;
       setInterval(() => {
-        const order = this.findOrder(id);
-        if (order === null) reject('Cannot find the order');
-        const isShipped = order.isShipped;
+        const deliveryOrder = this.findOrder(id);
+        if (deliveryOrder === null) reject('Cannot find the order');
+        const isShipped = deliveryOrder.isShipped;
         if (isShipped) resolve();
       }, 1000 / CHECK_RATE);
     });

@@ -4,6 +4,11 @@ import City from './city.js';
 import Graph from './graph.js';
 import { cityConfig, graphConfig } from '../data.js';
 import DeliveryManManager from './delivery-man-manager.js';
+import {
+  getOrders,
+  setCompleteOrder,
+  setProcessOrder,
+} from './backend-wrapper.js';
 
 const container = document.querySelector('.city-container');
 const app = new PIXIWrapper(container);
@@ -35,7 +40,9 @@ export default async function completeOrder(order) {
     isShipping: false,
     ...order,
   };
-  const machineIndex = await printerManager.completeOrderAwait(order);
-  await deliveryManager.completeOrderAwait(order, machineIndex);
+  await setProcessOrder(order.id);
+  const machineIndex = await printerManager.completeOrderAwait(newOrder);
+  await deliveryManager.completeOrderAwait(newOrder, machineIndex);
+  await setCompleteOrder(order.id);
   return true;
 }
