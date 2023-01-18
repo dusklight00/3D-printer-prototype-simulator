@@ -1,5 +1,6 @@
 import Printer from './printer.js';
 import { generateUUID } from '../utility/utils.js';
+import { setProcessOrder } from './backend-wrapper.js';
 
 export default class PrinterManager {
   constructor(city, ...printerIDs) {
@@ -142,6 +143,7 @@ export default class PrinterManager {
     if (orderIndex == null) return false;
 
     const order = this.queue[orderIndex];
+    await setProcessOrder(order.order.id);
     order.printerAllocated = freePrinterIndex;
 
     await this.assignWork(freePrinterIndex, orderIndex);

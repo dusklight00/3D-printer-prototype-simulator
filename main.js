@@ -4,6 +4,10 @@ import {
   getOrders,
 } from './modules/backend-wrapper.js';
 import completeOrder from './modules/controller.js';
+import Queue from './modules/queue.js';
+
+const queue = new Queue();
+queue.live();
 
 (async function () {
   await addOrder('pratul', 4, 0);
