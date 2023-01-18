@@ -5,6 +5,7 @@ import City from './modules/city.js';
 import Graph from './modules/graph.js';
 import { cityConfig, graphConfig } from './data.js';
 import DeliveryMan from './modules/delivery-man.js';
+import { generateUUID } from './utility/utils.js';
 
 class DeliveryManManager {
   constructor(
@@ -17,8 +18,15 @@ class DeliveryManManager {
   ) {
     this.men = [];
     this.queue = [];
+    this.printerManager = printerManager;
     for (let i = 0; i < numOfDeliveryMan; i++) {
-      const man = new DeliveryMan(app, graph, city, startingNode);
+      const man = new DeliveryMan(
+        app,
+        graph,
+        city,
+        printerManager,
+        startingNode
+      );
       this.men.push({
         object: man,
         isBusy: false,
@@ -26,8 +34,22 @@ class DeliveryManManager {
     }
   }
   addOrder(order) {
-    this.queue.push(order);
+    const id = generateUUID();
+    this.queue.push({
+      id: id,
+      ...order,
+    });
+    return id;
   }
+
+  findOrder(id) {
+    for (let i in this.queue) {
+      const order = this.queue[i];
+      if (order.id === id) return order;
+    }
+    return null;
+  }
+
   getUnshippedOrders() {
     const orders = [];
     this.queue.forEach((order) => {
@@ -67,6 +89,18 @@ class DeliveryManManager {
     order.isShipping = true;
     await man.object.completeOrder(homeIndex, machineIndex);
     man.isBusy = false;
+  }
+  completeOrderAwait(order) {
+    return new Promise((resolve, reject) => {
+      const id = this.addOrder(order);
+      const CHECK_RATE = 1;
+      setInterval(() => {
+        const order = this.findOrder(id);
+        if (order === null) reject('Cannot find the order');
+        const isShipped = order.isShipped;
+        if (isShipped) resolve();
+      }, 1000 / CHECK_RATE);
+    });
   }
   start() {
     const FRAME_RATE = 1;
@@ -116,5 +150,7 @@ const order2 = {
   isShipping: false,
 };
 
-deliveryManager.addOrder(order1);
-deliveryManager.addOrder(order2);
+(async function () {
+  await printerManager.completeOrderAwait(order1);
+  await deliveryManager.completeOrderAwait(order1);
+})();

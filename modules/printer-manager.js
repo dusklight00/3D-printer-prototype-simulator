@@ -65,6 +65,11 @@ export default class PrinterManager {
     if (printer === null) return null;
     return printer.isDockFree;
   }
+  undockPrinter(printerIndex) {
+    // console.log(this.printers);
+    const printer = this.printers[printerIndex].object;
+    printer.undock();
+  }
   getIncompleteOrderIndex() {
     for (let i in this.queue) {
       const order = this.queue[i];
@@ -124,6 +129,16 @@ export default class PrinterManager {
 
     await this.assignWork(freePrinterIndex, orderIndex);
     return true;
+  }
+  completeOrderAwait(order) {
+    return new Promise((resolve, reject) => {
+      const id = this.addOrder(order);
+      const CHECK_RATE = 1;
+      setInterval(() => {
+        const isComplete = this.isOrderComplete(id);
+        if (isComplete) resolve();
+      }, 1000 / CHECK_RATE);
+    });
   }
   start() {
     const FRAME_RATE = 1;

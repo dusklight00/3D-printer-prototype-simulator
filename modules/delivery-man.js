@@ -2,12 +2,13 @@ import Man from './man.js';
 import BunnySprite from '../sprites/bunny-sprite.js';
 
 export default class DeliveryMan extends Man {
-  constructor(app, graph, city, startingNodeIndex) {
+  constructor(app, graph, city, printerManager, startingNodeIndex) {
     const startingNodeInfo = graph.getNodeDetails(startingNodeIndex);
     const sprite = new BunnySprite(app, startingNodeInfo.x, startingNodeInfo.y);
     super(app, sprite);
     this.graph = graph;
     this.city = city;
+    this.printerManager = printerManager;
     this.currentNode = startingNodeIndex;
     this.hasPackageStatus = false;
   }
@@ -25,8 +26,10 @@ export default class DeliveryMan extends Man {
     };
     await this.move(x, y);
     if (changeStatus) this.toggleHasPackageStatus();
-    if (machineIndex !== null)
+    if (machineIndex !== null) {
       this.city.setMachineNotification(machineIndex, false);
+      this.printerManager.undockPrinter(machineIndex);
+    }
     await this.move(returnLocation.x, returnLocation.y);
   }
 
