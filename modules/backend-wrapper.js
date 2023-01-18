@@ -12,6 +12,17 @@ export async function getOrders() {
   return orders;
 }
 
+export async function getIncompleteOrders() {
+  const orders = await getOrders();
+  const incompleteOrders = [];
+  orders.forEach((order) => {
+    const status = order.status;
+    if (status === 'complete') return;
+    incompleteOrders.push(order);
+  });
+  return incompleteOrders;
+}
+
 export async function addOrder(name, completionTime, homeIndex) {
   const response = await get(
     BASE_URL +
