@@ -65,9 +65,20 @@ export default class PrinterManager {
     if (printer === null) return null;
     return printer.isDockFree;
   }
+  getOrderHavingPrinterAllocation(printerIndex) {
+    for (let i in this.queue) {
+      const queueOrder = this.queue[i];
+      if (queueOrder.printerAllocated == printerIndex) return queueOrder;
+    }
+    return null;
+  }
   undockPrinter(printerIndex) {
-    // console.log(this.printers);
+    // const queueOrder = this.getOrderHavingPrinterAllocation(printerIndex);
+    // queueOrder.isTaken = true;
+    // console.log(queueOrder);
     const printer = this.printers[printerIndex].object;
+    const printerConfig = this.printers[printerIndex];
+    printerConfig.isDockFree = true;
     printer.undock();
   }
   getIncompleteOrderIndex() {
@@ -83,6 +94,7 @@ export default class PrinterManager {
     return null;
   }
   getFreePrinterIndex() {
+    // console.log(this.printers);
     for (let i in this.printers) {
       const printer = this.printers[i];
       const isPrinterFree = printer.isPrinterFree;
@@ -123,6 +135,8 @@ export default class PrinterManager {
   async assignWorkToFreePrinter() {
     const freePrinterIndex = this.getFreePrinterIndex();
     const orderIndex = this.getIncompleteOrderIndex();
+
+    // console.log(console.log(freePrinterIndex));
 
     if (freePrinterIndex == null) return false;
     if (orderIndex == null) return false;

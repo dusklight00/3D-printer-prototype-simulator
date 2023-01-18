@@ -143,17 +143,20 @@ async function completeOrder(order) {
 
 const order1 = {
   home: 0,
-  completionTime: 10,
+  completionTime: 1,
   isShipped: false,
   isShipping: false,
 };
 
 const order2 = {
   home: 1,
-  completionTime: 10,
+  completionTime: 1,
   isShipped: false,
   isShipping: false,
 };
 
 completeOrder(order1);
+completeOrder(order2);
+completeOrder(order2);
+completeOrder(order2);
 completeOrder(order2);
