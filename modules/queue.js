@@ -1,9 +1,9 @@
-import OrderElement from "./order-element.js";
-import { getOrders } from "./backend-wrapper.js";
+import OrderElement from './order-element.js';
+import { getIncompleteOrders, getOrders } from './backend-wrapper.js';
 
 export default class Queue {
   constructor() {
-    this.QUEUE_CONTAINER = document.querySelector(".queue-container");
+    this.QUEUE_CONTAINER = document.querySelector('.queue-container');
     this.orders = [];
   }
   render(queueConfig) {
@@ -15,7 +15,7 @@ export default class Queue {
     });
   }
   truncate() {
-    this.QUEUE_CONTAINER.innerHTML = "";
+    this.QUEUE_CONTAINER.innerHTML = '';
   }
   update(queueConfig) {
     this.truncate();
