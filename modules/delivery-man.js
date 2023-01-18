@@ -2,13 +2,12 @@ import Man from './man.js';
 import BunnySprite from '../sprites/bunny-sprite.js';
 
 export default class DeliveryMan extends Man {
-  constructor(app, graph, city, printerManager, startingNodeIndex) {
+  constructor(app, graph, city, startingNodeIndex) {
     const startingNodeInfo = graph.getNodeDetails(startingNodeIndex);
     const sprite = new BunnySprite(app, startingNodeInfo.x, startingNodeInfo.y);
     super(app, sprite);
     this.graph = graph;
     this.city = city;
-    this.manager = printerManager;
     this.currentNode = startingNodeIndex;
     this.hasPackageStatus = false;
   }
@@ -52,27 +51,27 @@ export default class DeliveryMan extends Man {
     this.hasPackage(this.hasPackageStatus);
   }
 
-  async completeOrder(order) {
-    const machineIndex = order.machine;
-    const homeIndex = order.home;
-    const completionTime = order.completionTime;
-    const printerAllocated = order.printerAllocated;
+  // async completeOrder(order) {
+  //   const machineIndex = order.machine;
+  //   const homeIndex = order.home;
+  //   const completionTime = order.completionTime;
+  //   const printerAllocated = order.printerAllocated;
 
-    await this.manager.assignPrinterWork(printerAllocated, completionTime);
+  //   await this.manager.assignPrinterWork(printerAllocated, completionTime);
 
-    const machineConnectingNodeIndex =
-      this.graph.getMachineConnectingNode(machineIndex);
-    const homeConnectingNodeIndex = this.graph.getHomeConnectingNode(homeIndex);
+  //   const machineConnectingNodeIndex =
+  //     this.graph.getMachineConnectingNode(machineIndex);
+  //   const homeConnectingNodeIndex = this.graph.getHomeConnectingNode(homeIndex);
 
-    const homeNode = this.graph.getHomeNode(homeIndex);
-    const machineNode = this.graph.getMachineNode(machineIndex);
+  //   const homeNode = this.graph.getHomeNode(homeIndex);
+  //   const machineNode = this.graph.getMachineNode(machineIndex);
 
-    this.city.setMachineNotification(machineIndex, true);
-    await this.moveShortestPath(machineConnectingNodeIndex);
-    await this.giveAndCome(machineNode.x, machineNode.y, true, machineIndex);
+  //   this.city.setMachineNotification(machineIndex, true);
+  //   await this.moveShortestPath(machineConnectingNodeIndex);
+  //   await this.giveAndCome(machineNode.x, machineNode.y, true, machineIndex);
 
-    await this.moveShortestPath(homeConnectingNodeIndex);
-    await this.moveShortestPath(homeConnectingNodeIndex);
-    await this.giveAndCome(homeNode.x, homeNode.y, true);
-  }
+  //   await this.moveShortestPath(homeConnectingNodeIndex);
+  //   await this.moveShortestPath(homeConnectingNodeIndex);
+  //   await this.giveAndCome(homeNode.x, homeNode.y, true);
+  // }
 }

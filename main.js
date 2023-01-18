@@ -81,6 +81,36 @@ const graphConfig = {
   ],
 };
 
+class DeliveryManManager {
+  constructor(app, graph, city, manager, startingNode, numOfDeliveryMan) {
+    this.mans = [];
+    this.loadDeliveryMans(numOfDeliveryMan, startingNode);
+  }
+  loadDeliveryMans(numOfDeliveryMan, startingNode) {
+    for (let i = 0; i < numOfDeliveryMan; i++) {
+      const man = new DeliveryMan(app, graph, city, startingNode);
+      this.mans.push(man);
+    }
+  }
+}
+
+class OrderManager {
+  constructor(orders, printerManager, deliveryManager) {
+    this.orders = orders;
+    this.printerStatus = [];
+    this.printerManager = printerManager;
+    this.deliveryManager = deliveryManager;
+  }
+
+  start() {
+    const FRAME_RATE = 30;
+    this.animation = setInterval(() => {
+      if (!this.orders.length) return;
+      const order = this.orders[0];
+    }, 1000 / FRAME_RATE);
+  }
+}
+
 const container = document.querySelector('.city-container');
 const app = new PIXIWrapper(container);
 
@@ -88,9 +118,16 @@ const graph = new Graph(graphConfig);
 graph.render(app);
 
 const city = new City(app, cityConfig);
-const manager = new PrinterManager(['printer1', 'printer2', 'printer3']);
+const manager = new PrinterManager('printer1', 'printer2', 'printer3');
+manager.start();
+manager.addQueue(4);
+manager.addQueue(4);
+manager.addQueue(4);
+manager.addQueue(4);
+manager.addQueue(4);
+manager.addQueue(4);
 
-const man = new DeliveryMan(app, graph, city, manager, 0);
+const man = new DeliveryMan(app, graph, city, 0);
 
 const order = {
   machine: 0,
@@ -99,7 +136,7 @@ const order = {
   printerAllocated: 0,
 };
 
-man.completeOrder(order);
+// man.completeOrder(order);
 
 // man.moveShortestPath(3);
 

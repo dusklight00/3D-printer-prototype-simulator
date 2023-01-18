@@ -91,7 +91,7 @@ export function findComponents(magnitude, angle) {
       y: magnitude * Math.cos(acuteAngle),
     };
   }
-  return new Error("Angle is greater than 2 * Math.PI");
+  return new Error('Angle is greater than 2 * Math.PI');
 }
 
 export function convertRadianToDegree(angle) {
@@ -106,7 +106,7 @@ export function get(url) {
         resolve(this.responseText);
       }
     };
-    request.open("GET", url);
+    request.open('GET', url);
     request.send();
   });
 }
@@ -117,4 +117,9 @@ export function delay(timeout) {
       resolve();
     }, timeout);
   });
+}
+
+export function generateUUID() {
+  const uuid = Date.now().toString(36) + Math.random().toString(36).substr(2);
+  return uuid;
 }

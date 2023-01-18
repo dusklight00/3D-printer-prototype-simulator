@@ -19,6 +19,7 @@ export default class Printer {
     this.printer.classList = 'printer complete clear';
   }
   setProgress(progress) {
+    // console.log(progress);
     this.progressValue = progress;
     this.progress.style.width = this.progressValue * 100 + '%';
   }
