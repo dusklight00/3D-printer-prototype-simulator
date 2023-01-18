@@ -5,6 +5,7 @@ export default class Printer {
     this.printer = document.getElementById(printerID);
     this.progress = this.printer.querySelector('.base .progress-bar .progress');
     this.progressValue = 0;
+    this.undock();
   }
   start() {
     this.animation = setInterval(() => {
@@ -15,8 +16,11 @@ export default class Printer {
     clearInterval(this.animation);
     this.printer.classList = 'printer complete';
   }
-  clear() {
-    this.printer.classList = 'printer complete clear';
+  undock() {
+    this.printer.classList.add('clear');
+  }
+  dock() {
+    this.printer.classList.remove('clear');
   }
   setProgress(progress) {
     // console.log(progress);
@@ -25,6 +29,7 @@ export default class Printer {
   }
   completeWork(timeRequired) {
     return new Promise((resolve, reject) => {
+      this.dock();
       this.start();
       const PROGRESS_UPDATE_DELAY = 100;
       const strokes = (timeRequired * 1000) / PROGRESS_UPDATE_DELAY;

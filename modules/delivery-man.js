@@ -51,27 +51,20 @@ export default class DeliveryMan extends Man {
     this.hasPackage(this.hasPackageStatus);
   }
 
-  // async completeOrder(order) {
-  //   const machineIndex = order.machine;
-  //   const homeIndex = order.home;
-  //   const completionTime = order.completionTime;
-  //   const printerAllocated = order.printerAllocated;
+  async completeOrder(homeIndex, machineIndex) {
+    const machineConnectingNodeIndex =
+      this.graph.getMachineConnectingNode(machineIndex);
+    const homeConnectingNodeIndex = this.graph.getHomeConnectingNode(homeIndex);
 
-  //   await this.manager.assignPrinterWork(printerAllocated, completionTime);
+    const homeNode = this.graph.getHomeNode(homeIndex);
+    const machineNode = this.graph.getMachineNode(machineIndex);
 
-  //   const machineConnectingNodeIndex =
-  //     this.graph.getMachineConnectingNode(machineIndex);
-  //   const homeConnectingNodeIndex = this.graph.getHomeConnectingNode(homeIndex);
+    this.city.setMachineNotification(machineIndex, true);
+    await this.moveShortestPath(machineConnectingNodeIndex);
+    await this.giveAndCome(machineNode.x, machineNode.y, true, machineIndex);
 
-  //   const homeNode = this.graph.getHomeNode(homeIndex);
-  //   const machineNode = this.graph.getMachineNode(machineIndex);
-
-  //   this.city.setMachineNotification(machineIndex, true);
-  //   await this.moveShortestPath(machineConnectingNodeIndex);
-  //   await this.giveAndCome(machineNode.x, machineNode.y, true, machineIndex);
-
-  //   await this.moveShortestPath(homeConnectingNodeIndex);
-  //   await this.moveShortestPath(homeConnectingNodeIndex);
-  //   await this.giveAndCome(homeNode.x, homeNode.y, true);
-  // }
+    await this.moveShortestPath(homeConnectingNodeIndex);
+    await this.moveShortestPath(homeConnectingNodeIndex);
+    await this.giveAndCome(homeNode.x, homeNode.y, true);
+  }
 }

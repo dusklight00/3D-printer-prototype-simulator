@@ -46,6 +46,7 @@
 .workpiece {
   border: solid thin #000;
   flex: 1;
+  background: #0099ff;
 }
 
 .arm {
@@ -88,4 +89,16 @@
   background-color: greenyellow;
   width: 0%;
   height: 100%;
+}
+
+.dock-full-signal {
+  background: yellowgreen;
+  height: 10px;
+  width: 10px;
+  margin: 10px;
+  display: none;
+}
+
+.show-dock-full .dock-full-signal {
+  display: block;
 }

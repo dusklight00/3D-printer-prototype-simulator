@@ -1,7 +1,7 @@
-import PIXIWrapper from "./wrappers/pixi-wrapper.js";
-import { graphConfig } from "./data.js";
-import DeliveryMan from "./models/delivery-man.js";
-import Graph from "./models/graph.js";
+import PIXIWrapper from './wrappers/pixi-wrapper.js';
+import { graphConfig } from './data.js';
+import DeliveryMan from './models/delivery-man.js';
+import Graph from './models/graph.js';
 
 const app = new PIXIWrapper();
 const graph = new Graph(graphConfig);
@@ -32,16 +32,16 @@ const man = new DeliveryMan(app, graph, 0);
   </div> */
 }
 
-import Queue from "./modules/queue.js";
+import Queue from './modules/queue.js';
 
 const config = [
   {
-    name: "pratul",
-    status: "Complete",
+    name: 'pratul',
+    status: 'Complete',
   },
   {
-    name: "pratul2",
-    status: "Complete",
+    name: 'pratul2',
+    status: 'Complete',
   },
 ];
 
@@ -60,3 +60,60 @@ const config = [
 
 // const printer = new Printer("printer1");
 // printer.completeWork(10);
+
+// export const city = [
+//   {
+//     x: 70,
+//     y: 80,
+//     width: 80,
+//     height: 90,
+//   },
+//   {
+//     x: 70,
+//     y: 220,
+//     width: 80,
+//     height: 100,
+//   },
+//   {
+//     x: 70,
+//     y: 360,
+//     width: 80,
+//     height: 70,
+//   },
+//   {
+//     x: 225,
+//     y: 500,
+//     width: 400,
+//     height: 100,
+//   },
+//   {
+//     x: 300,
+//     y: 153,
+//     width: 240,
+//     height: 237,
+//   },
+//   {
+//     x: 300,
+//     y: 360,
+//     width: 250,
+//     height: 70,
+//   },
+//   {
+//     x: 610,
+//     y: 155,
+//     width: 250,
+//     height: 237,
+//   },
+//   {
+//     x: 610,
+//     y: 336,
+//     width: 250,
+//     height: 120,
+//   },
+//   {
+//     x: 610,
+//     y: 500,
+//     width: 250,
+//     height: 100,
+//   },
+// ];

@@ -2,8 +2,10 @@ import { drawLine, drawPoint } from '../utility/texture.js';
 import { checkArrContainsArr } from '../utility/utils.js';
 
 export default class Graph {
-  constructor(graphConfig) {
+  constructor(app, graphConfig, isRender = false) {
+    this.app = app;
     this.config = graphConfig;
+    if (isRender) this.render();
   }
 
   getMachineConnectingNode(machineIndex) {
@@ -95,26 +97,26 @@ export default class Graph {
     return pairs;
   }
 
-  render(app) {
+  render() {
     const RED_COLOR = 0xff0000;
     const BLUE_COLOR = 0x0099ff;
 
     // Rendering Home
     this.config.homes.forEach((home) => {
       const point = drawPoint(home.x, home.y, RED_COLOR);
-      app.render(point);
+      this.app.render(point);
     });
 
     // Rendering Machines
     this.config.machines.forEach((machine) => {
       const point = drawPoint(machine.x, machine.y, BLUE_COLOR);
-      app.render(point);
+      this.app.render(point);
     });
 
     // Rendering Nodes
     this.config.nodes.forEach((node) => {
       const point = drawPoint(node.x, node.y);
-      app.render(point);
+      this.app.render(point);
     });
 
     // Rendering Node Connections
@@ -125,7 +127,7 @@ export default class Graph {
       const node1 = this.config.nodes[nodeOneIndex];
       const node2 = this.config.nodes[nodeTwoIndex];
       const line = drawLine(node1.x, node1.y, node2.x, node2.y);
-      app.render(line);
+      this.app.render(line);
     });
 
     // Rendering Home Connections
@@ -139,7 +141,7 @@ export default class Graph {
         connectingNode.y,
         RED_COLOR
       );
-      app.render(line);
+      this.app.render(line);
     });
 
     // Rending Machine Connections
@@ -153,7 +155,7 @@ export default class Graph {
         connectingNode.y,
         BLUE_COLOR
       );
-      app.render(line);
+      this.app.render(line);
     });
   }
 }

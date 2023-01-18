@@ -2,29 +2,51 @@ import Printer from './printer.js';
 import { generateUUID } from '../utility/utils.js';
 
 export default class PrinterManager {
-  constructor(...printerIDs) {
+  constructor(city, ...printerIDs) {
+    this.city = city;
     this.printers = [];
-    this.status = new Array(printerIDs.length).fill(false);
     this.queue = [];
     printerIDs.forEach((id) => {
       const printer = new Printer(id);
-      this.printers.push(printer);
+      this.printers.push({
+        id: id,
+        object: printer,
+        isDockFree: true,
+        isPrinterFree: true,
+      });
     });
   }
-  addQueue(completionTime) {
+  addOrder(order) {
     const id = generateUUID();
     this.queue.push({
       id: id,
-      completionTime: completionTime,
+      order: order,
       isComplete: false,
       isProcessing: false,
+      isTaken: false,
+      allocatedPrinter: null,
     });
     return id;
+  }
+  collectItem(id) {
+    const order = this.getOrderDetail(id);
+    const allocatedPrinterIndex = order.allocatedPrinter;
+    const printer = this.printers[allocatedPrinterIndex].object;
+    printer.undock();
+    this.city.setMachineNotification(allocatedPrinterIndex, false);
+    order.isTaken = true;
   }
   getOrderDetail(id) {
     for (let i in this.queue) {
       const order = this.queue[i];
       if (order.id == id) return order;
+    }
+    return null;
+  }
+  getPrinter(id) {
+    for (let i in this.printers) {
+      const printer = this.printers[i];
+      if (printer.id == id) return printer;
     }
     return null;
   }
@@ -37,6 +59,11 @@ export default class PrinterManager {
     const order = this.getOrderDetail(id);
     if (order === null) return null;
     return order.isProcessing;
+  }
+  isDockFree(id) {
+    const printer = getPrinter(id);
+    if (printer === null) return null;
+    return printer.isDockFree;
   }
   getIncompleteOrderIndex() {
     for (let i in this.queue) {
@@ -51,21 +78,42 @@ export default class PrinterManager {
     return null;
   }
   getFreePrinterIndex() {
-    for (let i in this.status) {
-      const printerStatus = this.status[i];
-      if (!printerStatus) return i;
+    for (let i in this.printers) {
+      const printer = this.printers[i];
+      const isPrinterFree = printer.isPrinterFree;
+      const isDockFree = printer.isDockFree;
+      if (isPrinterFree && isDockFree) return i;
     }
     return null;
   }
+  getUntakenPrintedItems() {
+    const orders = [];
+    this.queue.forEach((order) => {
+      if (!order.isComplete) return;
+      if (order.isTaken) return;
+      orders.push(order);
+    });
+    return orders;
+  }
   async assignWork(printerIndex, orderIndex) {
-    this.status[printerIndex] = true;
-    this.queue[orderIndex].isProcessing = true;
-    const completionTime = this.queue[orderIndex].completionTime;
-    const printer = this.printers[printerIndex];
+    const printerConfig = this.printers[printerIndex];
+    const printer = printerConfig.object;
+    const order = this.queue[orderIndex].order;
+    const queue = this.queue[orderIndex];
+
+    queue.printerAllocated = printerIndex;
+    printerConfig.isPrinterFree = false;
+    printerConfig.isDockFree = false;
+    queue.isProcessing = true;
+
+    const completionTime = order.completionTime;
     await printer.completeWork(completionTime);
-    this.queue[orderIndex].isProcessing = false;
-    this.queue[orderIndex].isComplete = true;
-    this.status[printerIndex] = false;
+    this.city.setMachineNotification(printerIndex, true);
+
+    printerConfig.isPrinterFree = true;
+
+    queue.isProcessing = false;
+    queue.isComplete = true;
   }
   async assignWorkToFreePrinter() {
     const freePrinterIndex = this.getFreePrinterIndex();

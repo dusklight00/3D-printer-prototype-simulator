@@ -1,5 +1,9 @@
 export const graphConfig = {
-  machines: [{ x: 200, y: 200, connectingNode: 2 }],
+  machines: [
+    { x: 200, y: 200, connectingNode: 2 },
+    { x: 300, y: 400, connectingNode: 4 },
+    { x: 300, y: 100, connectingNode: 3 },
+  ],
   homes: [
     {
       x: 50,
@@ -43,59 +47,46 @@ export const graphConfig = {
   ],
 };
 
-export const city = [
-  {
-    x: 70,
-    y: 80,
-    width: 80,
-    height: 90,
-  },
-  {
-    x: 70,
-    y: 220,
-    width: 80,
-    height: 100,
-  },
-  {
-    x: 70,
-    y: 360,
-    width: 80,
-    height: 70,
-  },
-  {
-    x: 225,
-    y: 500,
-    width: 400,
-    height: 100,
-  },
-  {
-    x: 300,
-    y: 153,
-    width: 240,
-    height: 237,
-  },
-  {
-    x: 300,
-    y: 360,
-    width: 250,
-    height: 70,
-  },
-  {
-    x: 610,
-    y: 155,
-    width: 250,
-    height: 237,
-  },
-  {
-    x: 610,
-    y: 336,
-    width: 250,
-    height: 120,
-  },
-  {
-    x: 610,
-    y: 500,
-    width: 250,
-    height: 100,
-  },
-];
+export const cityConfig = {
+  homes: [
+    {
+      x: 50,
+      y: 50,
+      width: 100,
+      height: 100,
+      label: '1',
+    },
+  ],
+  buildings: [
+    // {
+    //   x: 300,
+    //   y: 100,
+    //   width: 100,
+    //   height: 100,
+    // },
+  ],
+  machines: [
+    {
+      index: 0,
+      x: 200,
+      y: 200,
+      width: 100,
+      height: 100,
+      label: '1',
+    },
+    {
+      x: 300,
+      y: 400,
+      width: 100,
+      height: 100,
+      label: '2',
+    },
+    {
+      x: 300,
+      y: 100,
+      width: 100,
+      height: 100,
+      label: '3',
+    },
+  ],
+};
