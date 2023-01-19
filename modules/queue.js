@@ -1,6 +1,7 @@
 import OrderElement from './order-element.js';
 import { getIncompleteOrders, getOrders } from './backend-wrapper.js';
 
+
 export default class Queue {
   constructor() {
     this.QUEUE_CONTAINER = document.querySelector('.queue-container');
@@ -33,7 +34,7 @@ export default class Queue {
   live() {
     const UPDATE_DELAY = 1000;
     setInterval(async () => {
-      const orders = await getOrders();
+      const orders = await getIncompleteOrders();
       this.update(orders);
     }, UPDATE_DELAY);
   }
